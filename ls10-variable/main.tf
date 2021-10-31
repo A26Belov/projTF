@@ -79,7 +79,6 @@ resource "aws_launch_configuration" "web" {
 
 }
 
-
 resource "aws_autoscaling_group" "web" {
   name                 = "AGS-${aws_launch_configuration.web.name}"
   launch_configuration = aws_launch_configuration.web.name
@@ -141,7 +140,6 @@ resource "aws_elb" "web" {
     Name = "LB-terraform-elb"
   }
 }
-
 
 resource "aws_default_subnet" "default_az1" {
   availability_zone = data.aws_availability_zones.working.names[0]
