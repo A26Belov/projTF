@@ -10,8 +10,8 @@ variable "instance_type" {
 }
 
 variable "key_name" {
-  description = "Key Name"
-  default     = "alexb-Franfurt-Linux"
+  description = "INPUT Key Name for SSH connect to Instance"
+  default     = ""
 }
 
 
