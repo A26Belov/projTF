@@ -1,0 +1,33 @@
+
+resource "tls_private_key" "dev" {
+  algorithm = "RSA"
+  rsa_bits  = 2048
+}
+
+
+
+resource "aws_key_pair" "generated_key" {
+  key_name   = "myTerraformKey"
+  public_key = tls_private_key.dev.public_key_openssh
+}
+
+
+
+
+resource "local_file" "pem_file" {
+  filename = "TerraformKey-Frankfurt.pem"
+  content  = tls_private_key.dev.private_key_pem
+}
+
+
+
+  # key_name = aws_key_pair.generated_key.key_name
+
+
+
+  #============================#
+
+  output "out_rsa" {
+    value     = tls_private_key.dev.private_key_pem
+    sensitive = true
+  }
