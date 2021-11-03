@@ -1,6 +1,6 @@
 variable "region" {
-  description = "region EU-CENTRAL-1"
-  default     = "eu-central-1"
+  description = "region eu-north-1"
+  default     = "eu-north-1"
 }
 
 variable "nameOwnerRDS" {
