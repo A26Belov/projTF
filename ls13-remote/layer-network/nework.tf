@@ -1,5 +1,5 @@
 provider "aws" {
-  region  = "eu-north-1"
+  region  = var.region
   profile = "default"
 }
 terraform {
