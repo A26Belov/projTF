@@ -2,14 +2,25 @@ provider "aws" {
   region = "eu-north-1"
 }
 
+
+# lookup & search lastest aws amazon ami #
+data "aws_ami" "lastest_Amazon_Linux" {
+  owners      = ["amazon"]
+  most_recent = true
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+  }
+}
+
+
 resource "aws_instance" "myWEBServer" {
-  #  count                  = 0
-  ami                    = "ami-07df274a488ca9195"
-  instance_type          = "t2.micro"
-  key_name               = "alexb-Franfurt-Linux"
+  ami                    = data.aws_ami.lastest_Amazon_Linux.id
+  instance_type          = t3.micro
+  key_name               = "alexb-AWS-Stockholm"
   iam_instance_profile   = "AmazonS3ReadOnlyAccess"
   vpc_security_group_ids = [aws_security_group.webServerSecurityGroup.id]
-  user_data              = file("c:/Terraform/include/bootS3.sh")
+  //  user_data              = file("c:/Terraform/include/bootS3.sh")
   tags = {
     Name    = "RedHatwebsrv"
     Owner   = "root"
