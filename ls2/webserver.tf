@@ -16,7 +16,7 @@ data "aws_ami" "lastest_Amazon_Linux" {
 
 resource "aws_instance" "myWEBServer" {
   ami                    = data.aws_ami.lastest_Amazon_Linux.id
-  instance_type          = t3.micro
+  instance_type          = "t3.micro"
   key_name               = "alexb-AWS-Stockholm"
   iam_instance_profile   = "AmazonS3ReadOnlyAccess"
   vpc_security_group_ids = [aws_security_group.webServerSecurityGroup.id]
@@ -53,7 +53,7 @@ resource "aws_security_group" "webServerSecurityGroup" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["93.125.107.0/24"]
     description = "SSH"
 
   }
